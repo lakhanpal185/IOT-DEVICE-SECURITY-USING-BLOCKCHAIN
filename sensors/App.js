@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { View,Text,StyleSheet, SafeAreaView } from "react-native";
+import LightSensorData from "./mobileSensors/LightSensorData";
+import SensorData from "./mobileSensors/SensorData";
+
 import CustomCamera from "./src/components/CustomCamera";
+import CustomOrientation from "./src/components/CustomOrientation";
 
 export default function App() {
   const [hello, setHello] = useState("");
@@ -12,7 +16,8 @@ export default function App() {
 
   return(
     <SafeAreaView style={styles.container}>
-      <CustomCamera/>
+      <SensorData/>
+      <LightSensorData/>
     </SafeAreaView>
   );}
 
@@ -20,5 +25,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent:'center',
+    alignContent:'center',
   },
 })
