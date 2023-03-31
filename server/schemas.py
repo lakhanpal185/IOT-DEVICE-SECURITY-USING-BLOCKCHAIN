@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class RequestData(BaseModel):
     sensor_name: str
     x: float
@@ -7,4 +8,5 @@ class RequestData(BaseModel):
     z: float
     
 class ResponseData(RequestData):
-    pass
+    class Config():
+        orm_mode = True
