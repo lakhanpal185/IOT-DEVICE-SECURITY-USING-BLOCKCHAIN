@@ -8,5 +8,6 @@ class RequestData(BaseModel):
     z: float
     
 class ResponseData(RequestData):
+    id: int
     class Config():
         orm_mode = True

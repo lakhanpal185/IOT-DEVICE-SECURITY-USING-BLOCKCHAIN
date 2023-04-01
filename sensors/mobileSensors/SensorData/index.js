@@ -33,13 +33,13 @@ const SensorData = () =>{
   
   const sendDataToServer = (sensorType, data) => {
     const formattedData = {
-      sensorType,
+      sensor_name:sensorType,
       x: data.x,
       y: data.y,
       z: data.z
     };
     
-    axios.post('https://yourserverurl.com/data', formattedData)
+    axios.post('http://192.168.151.177:8000/sensorxyz', formattedData)
       .then(response => {
         console.log(response.data);
       })
