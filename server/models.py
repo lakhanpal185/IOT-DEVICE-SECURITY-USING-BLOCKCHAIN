@@ -9,3 +9,11 @@ class Sensorsxyz(Base):
     x = Column(Float)
     y = Column(Float)
     z = Column(Float)
+
+
+class Lightsensor(Base):
+    __tablename__ = "lightsensor"
+
+    id = Column(Integer,primary_key=True, index=True)
+    sensor_name = Column(String)
+    illuminance = Column(Float)

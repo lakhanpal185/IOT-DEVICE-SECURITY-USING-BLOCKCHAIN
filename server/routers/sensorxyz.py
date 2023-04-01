@@ -28,7 +28,7 @@ async def read_name_data(name: str,response: Response, db: Session = Depends(get
     return data
 
 
-@router.post("/", response_model= schemas.ResponseData)
+@router.post("/",status_code=201,response_model= schemas.ResponseData)
 async def write_data(request:schemas.RequestData, db: Session = Depends(get_db)):
     new_data = models.Sensorsxyz(sensor_name = request.sensor_name, x=request.x, y=request.y, z=request.z)
     db.add(new_data)

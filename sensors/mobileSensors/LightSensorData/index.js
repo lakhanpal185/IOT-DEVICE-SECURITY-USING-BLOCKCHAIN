@@ -9,7 +9,7 @@ export default function LightSensorData() {
   useEffect(() => {
     const lightSubscription = LightSensor.addListener(lightData => {
       setLightData(lightData);
-      sendDataToServer('light', lightData); // Send the light data to the server
+      sendDataToServer('lightsensor', lightData); // Send the light data to the server
     });
 
     return () => {
@@ -21,11 +21,11 @@ export default function LightSensorData() {
 
   const sendDataToServer = (sensorType, data) => {
     const formattedData = {
-      sensorType,
+      sensor_name: sensorType,
       illuminance: data.illuminance
     };
     
-    axios.post('https://yourserverurl.com/data', formattedData)
+    axios.post('http://192.168.143.177:8000/lightsensor', formattedData)
       .then(response => {
         console.log(response.data);
       })
