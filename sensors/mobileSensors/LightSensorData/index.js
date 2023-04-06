@@ -1,45 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LightSensor } from 'expo-sensors';
-import axios from 'axios';
+
 
 export default function LightSensorData() {
+  const [connected, setConnected] = useState(false);
   const [lightData, setLightData] = useState(null);
+  const socketRef = useRef(null);
 
   useEffect(() => {
+    
+    socketRef.current = new WebSocket('ws://192.168.22.177:8000/lightsensor/');
+
+    socketRef.current.onopen = () => {
+      console.warn('connected 😂');
+      setConnected(true);
+    };
+
+    socketRef.current.onerror = (error) => {
+      console.error(error);
+    };
+
+
     const lightSubscription = LightSensor.addListener(lightData => {
       setLightData(lightData);
-      sendDataToServer('lightsensor', lightData); // Send the light data to the server
+      if (socketRef.current.readyState === WebSocket.OPEN) {
+        sendDataToServer('lightsensor', lightData); // Send the light data to the server 
+      }
+      
     });
 
     return () => {
       lightSubscription.remove();
+      socketRef.current.close(); 
     };
   }, []);
 
   const formattedLightData = lightData ? `Illuminance: ${lightData.illuminance}` : 'Light sensor not available';
 
+
   const sendDataToServer = (sensorType, data) => {
     const formattedData = {
       sensor_name: sensorType,
-      illuminance: data.illuminance
+      illuminance: data.illuminance,
+      timestamp: new Date().toISOString(),
     };
+  
+    try {
+      socketRef.current.send(JSON.stringify(formattedData));
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
     
-    axios.post('http://192.168.143.177:8000/lightsensor', formattedData)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   };
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{formattedLightData}</Text>
+      <Text style={styles.text}>illuminance : </Text>
+      <Text style={styles.text}>{lightData ? lightData.illuminance:"error data not persent" }</Text>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
