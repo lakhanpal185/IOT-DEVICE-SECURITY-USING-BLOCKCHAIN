@@ -10,7 +10,7 @@ export default function LightSensorData() {
 
   useEffect(() => {
     
-    socketRef.current = new WebSocket('ws://192.168.22.177:8000/lightsensor/');
+    socketRef.current = new WebSocket('ws://192.168.42.177:8000/lightsensor/');
 
     socketRef.current.onopen = () => {
       console.warn('connected 😂');
@@ -43,10 +43,10 @@ export default function LightSensorData() {
     const formattedData = {
       sensor_name: sensorType,
       illuminance: data.illuminance,
-      timestamp: new Date().toISOString(),
     };
   
     try {
+      console.warn('data');
       socketRef.current.send(JSON.stringify(formattedData));
     } catch (error) {
       console.error('Error sending data:', error);
@@ -66,13 +66,11 @@ export default function LightSensorData() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
 });

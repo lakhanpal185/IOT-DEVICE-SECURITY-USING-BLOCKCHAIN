@@ -6,7 +6,7 @@ export default function ShowLight() {
     const socketRef = useRef(null);
    
     useEffect(() => {
-        socketRef.current = new WebSocket('ws://192.168.22.177:8000/lightsensor/');
+        socketRef.current = new WebSocket('ws://192.168.42.177:8000/lightsensor/');
     
         socketRef.current.onmessage = (event) => {
           const data = JSON.parse(event.data);
@@ -33,7 +33,6 @@ export default function ShowLight() {
             <Text>{message || 'Waiting for data...'}</Text>
         </View> 
 );}
-  
    
   const styles = StyleSheet.create({
     
