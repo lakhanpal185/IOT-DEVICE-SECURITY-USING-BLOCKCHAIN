@@ -3,20 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { LightSensor } from 'expo-sensors';
 
 
-export default function LightSensorData() {
+export default function LightSensorData({ip}) {
   const [connected, setConnected] = useState(false);
   const [lightData, setLightData] = useState(null);
   const socketRef = useRef(null);
 
   useEffect(() => {
     
-    socketRef.current = new WebSocket('ws://192.168.42.177:8000/lightsensor/');
+    socketRef.current = new WebSocket(`ws://${ip}:8000/lightsensor/`);
 
     socketRef.current.onopen = () => {
       console.warn('connected 😂');
       setConnected(true);
     };
-
+    socketRef.current.onclose = (event) => {
+      console.error('WebSocket closed', event);
+    };
     socketRef.current.onerror = (error) => {
       console.error(error);
     };
@@ -46,7 +48,7 @@ export default function LightSensorData() {
     };
   
     try {
-      console.warn('data');
+      console.warn(formattedData);
       socketRef.current.send(JSON.stringify(formattedData));
     } catch (error) {
       console.error('Error sending data:', error);

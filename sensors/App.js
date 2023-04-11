@@ -11,9 +11,8 @@ export default function App() {
 
   return(
     <SafeAreaView style={styles.container}>
-        <CustomCamera/>
-        <SensorData/>
-        <LightSensorData/>
+        <SensorData ip={'192.168.39.177'}/>
+        <LightSensorData ip={'192.168.39.177'}/>       
        
     </SafeAreaView>
   );}
