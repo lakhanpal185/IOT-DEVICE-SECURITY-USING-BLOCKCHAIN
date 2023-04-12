@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import models
-from routers import sensorxyz,lightsensor
+from routers import sensorxyz,lightsensor,actuators
 from database import engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -19,6 +19,7 @@ app.add_middleware(
 
 app.include_router(sensorxyz.router)
 app.include_router(lightsensor.router)
+app.include_router(actuators.router)
 
 @app.get("/")
 def read_root():
