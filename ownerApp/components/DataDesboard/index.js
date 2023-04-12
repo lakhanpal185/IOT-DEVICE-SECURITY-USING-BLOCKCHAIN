@@ -28,10 +28,10 @@ const DataDesboard = ({ip}) => {
     },[])
     
 
-    const sendDataToServer = (actuatorType, data) => {
+    const sendDataToServer = (actuatorType, value) => {
         const formattedData = {
             actuator_name:actuatorType,
-            value:data,
+            value:value,
         };
 
         try{
@@ -48,13 +48,12 @@ const DataDesboard = ({ip}) => {
 
     const handleBrightnessChange = async (value) => {
         setBrightness(value);
-        console.warn(value);
-        sendDataToServer('brigthness',value);
+        sendDataToServer('brightness',value);
     };
     const toggleSwitch = () => {
         setIsEnabled(!isEnabled);
         console.log(!isEnabled);
-        sendDataToServer('torch',isEnabled)
+        sendDataToServer('torch',!isEnabled)
     };
 
   return (
