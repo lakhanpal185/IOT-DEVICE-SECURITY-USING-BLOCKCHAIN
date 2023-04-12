@@ -4,7 +4,7 @@ import DataDesboard from './components/DataDesboard';
 export default function App() {
   return (
     <View style={styles.container}>
-      <DataDesboard ip={'192.168.39.177'}/>
+      <DataDesboard ip={'192.168.121.177'}/>
     </View>
   );
 }
