@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View,FlatList } from 'react-native';
-import DataDesboard from './components/DataDesboard';
+import Navigation from './components/navigation';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <DataDesboard ip={'192.168.121.177'}/>
+      <Navigation />
     </View>
   );
 }

@@ -4,7 +4,7 @@ import * as Brightness from 'expo-brightness';
 import Slider from "@react-native-community/slider";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const DataDesboard = ({ip}) => {
+const ControllerScreen = ({ip}) => {
     const [brightness, setBrightness] = useState(0.5); // default brightness value
     const socketRef = useRef();
 
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DataDesboard;
+export default ControllerScreen;

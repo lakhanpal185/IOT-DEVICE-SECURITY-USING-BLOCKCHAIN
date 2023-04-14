@@ -14,7 +14,7 @@ export default function App() {
   const [permissionGranted, setPermissionGranted] = useState(false);
   const [isTorchOn, setIsTorchOn] = useState(false);
   const socketRef = useRef();
-  const ip = '192.168.121.177';
+  const ip = '192.168.45.177';
   
   useEffect(() => {
     socketRef.current = new WebSocket(`ws://${ip}:8000/actuators/`);
@@ -58,8 +58,8 @@ export default function App() {
 
   return(
     <SafeAreaView style={styles.container}>
-        <SensorData ip={ip}/>
-        <LightSensorData ip ={ip}/>
+        <SensorData />
+        <LightSensorData />
         {isTorchOn === true ?
         (<Image source={require("./assets/torchon.png")} style={styles.image}/>):(<Image source={require("./assets/torchoff.png")}style={styles.image}/>)}      
        

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Image, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
-const DataDesboard = ({ ip }) => {
+const DisplayScreen = ({ ip }) => {
   const [illuminance, setIlluminance] = useState(0);
   const [timestamp, setTimeStamp] = useState('');
   const socketRef = useRef(null);
@@ -191,4 +191,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DataDesboard;
+export default DisplayScreen;
